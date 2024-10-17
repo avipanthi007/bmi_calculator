@@ -1,4 +1,3 @@
-import 'package:bmi_calculator/features/view/screens/result_screen.dart';
 import 'package:bmi_calculator/features/view_model/home_screen_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,10 +11,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final homeViewModel = Get.find<HomeScreenViewmodel>();
+  @override
+  void initState() {
+    homeViewModel.height.value;
+    homeViewModel.weight.value;
+    homeViewModel.age.value;
+    
+    super.initState();
+  }
+  
 
   @override
   Widget build(BuildContext context) {
-    print("Build");
+    
     return Obx(
       () => Scaffold(
         backgroundColor: Colors.grey[800],

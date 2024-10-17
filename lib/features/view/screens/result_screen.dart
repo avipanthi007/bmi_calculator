@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/features/view_model/home_screen_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +11,8 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
+  final homeViewModel = Get.find<HomeScreenViewmodel>();
+
   @override
   initState() {
     chekNormal();
@@ -40,14 +43,14 @@ class _ResultScreenState extends State<ResultScreen> {
         toolbarHeight: 100,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.grey[800],
-        title: Text(
+        title: const Text(
           "Your Result",
-          style: const TextStyle(
+          style: TextStyle(
               fontSize: 40, color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Card(
           color: Colors.grey[700],
           elevation: 8,
@@ -63,7 +66,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Text(
@@ -73,7 +76,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Text(
@@ -90,11 +93,12 @@ class _ResultScreenState extends State<ResultScreen> {
       bottomNavigationBar: GestureDetector(
         onTap: () {
           Get.back();
+          homeViewModel.valueReset();
         },
         child: Container(
           height: 60,
           color: Colors.red,
-          child: Center(
+          child:const Center(
             child: Text("RE-CALCULATE",
                 style: TextStyle(color: Colors.white, fontSize: 22)),
           ),
