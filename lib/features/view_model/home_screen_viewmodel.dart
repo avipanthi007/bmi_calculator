@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/features/view/screens/result_screen.dart';
 import 'package:get/get.dart';
 
 class HomeScreenViewmodel extends GetxController {
@@ -7,10 +8,12 @@ class HomeScreenViewmodel extends GetxController {
   final height = 150.0.obs;
   final weight = 30.obs;
   final age = 20.obs;
+  
 
   calculate() {
     double baseHeight = (height / 100) * (height / 100);
     double result = weight / baseHeight;
+    Get.to(()=> ResultScreen(result: result,));
     print(result);
     print(height.value.toString());
     print(weight.value.toString());
