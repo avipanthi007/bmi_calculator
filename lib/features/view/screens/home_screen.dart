@@ -11,13 +11,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final homeViewModel = Get.find<HomeScreenViewmodel>();
-  bool selectMale = true;
-  bool selectFemale = false;
-  double _height = 150;
-  int _weight = 30;
-  int _age = 20;
+
   @override
   Widget build(BuildContext context) {
+    print("Build");
     return Obx(
       () => Scaffold(
         backgroundColor: Colors.grey[800],
@@ -35,13 +32,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   kRepeatedCard(
                     onTap: () {
-                      selectMale = !selectMale;
-                      selectFemale = !selectFemale;
-                      setState(() {});
+                      homeViewModel.selectMale.value =
+                          !homeViewModel.selectMale.value;
+                      homeViewModel.selectFemale.value =
+                          !homeViewModel.selectFemale.value;
                     },
                     height: Get.height * 0.26,
                     width: Get.width * 0.45,
-                    color: selectMale ? Colors.grey : Colors.grey[800],
+                    color: homeViewModel.selectMale.value
+                        ? Colors.grey
+                        : Colors.grey[800],
                     child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -59,13 +59,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   kRepeatedCard(
                     onTap: () {
-                      selectMale = !selectMale;
-                      selectFemale = !selectFemale;
-                      setState(() {});
+                      homeViewModel.selectMale.value =
+                          !homeViewModel.selectMale.value;
+                      homeViewModel.selectFemale.value =
+                          !homeViewModel.selectFemale.value;
                     },
                     height: Get.height * 0.26,
                     width: Get.width * 0.45,
-                    color: selectFemale ? Colors.grey : Colors.grey[800],
+                    color: homeViewModel.selectFemale.value
+                        ? Colors.grey
+                        : Colors.grey[800],
                     child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -107,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           min: 100,
                           max: 250,
                           divisions: 150,
-                          label: _height.toStringAsFixed(1),
+                          label: homeViewModel.height.value.toString(),
                           onChanged: (val) {
                             homeViewModel.height.value = val;
                           }),
@@ -200,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 backgroundColor: Colors.grey,
                                 child: IconButton(
                                     onPressed: () {
-                                      if (_age > 15) {
+                                      if (homeViewModel.age.value > 15) {
                                         homeViewModel.age.value--;
                                       }
                                     },
@@ -234,13 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         bottomNavigationBar: GestureDetector(
           onTap: () {
-            double baseHeight = (homeViewModel.height.value / 100) *
-                (homeViewModel.height.value / 100);
-            double result = homeViewModel.weight.value / baseHeight;
-            print(result);
-            debugPrint(homeViewModel.height.value.toString());
-            debugPrint(homeViewModel.weight.value.toString());
-            debugPrint(homeViewModel.age.value.toString());
+            homeViewModel.calculate();
           },
           child: Container(
             height: 60,
