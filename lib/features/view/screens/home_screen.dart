@@ -16,14 +16,12 @@ class _HomeScreenState extends State<HomeScreen> {
     homeViewModel.height.value;
     homeViewModel.weight.value;
     homeViewModel.age.value;
-    
+
     super.initState();
   }
-  
 
   @override
   Widget build(BuildContext context) {
-    
     return Obx(
       () => Scaffold(
         backgroundColor: Colors.grey[800],
