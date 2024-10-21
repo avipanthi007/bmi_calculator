@@ -11,27 +11,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final homeViewModel = Get.find<HomeScreenViewmodel>();
-  @override
-  void initState() {
-    homeViewModel.height.value;
-    homeViewModel.weight.value;
-    homeViewModel.age.value;
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.grey[800],
+      appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.grey[800],
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.grey[800],
-          title: const Text("BMI Calculator",
-              style: TextStyle(fontSize: 30, color: Colors.white)),
-        ),
-        body: Padding(
+        title: const Text("BMI Calculator",
+            style: TextStyle(fontSize: 30, color: Colors.white)),
+      ),
+      body: Obx(
+        () => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Column(
             children: [
@@ -242,21 +234,21 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        bottomNavigationBar: GestureDetector(
-          onTap: () {
-            homeViewModel.calculate();
-          },
-          child: Container(
-            height: 60,
-            color: Colors.red,
-            child: const Center(
-              child: Text(
-                "CALCULATE",
-                style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
+      ),
+      bottomNavigationBar: GestureDetector(
+        onTap: () {
+          homeViewModel.calculate();
+        },
+        child: Container(
+          height: 60,
+          color: Colors.red,
+          child: const Center(
+            child: Text(
+              "CALCULATE",
+              style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
